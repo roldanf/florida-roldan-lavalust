@@ -321,6 +321,79 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			nav { padding: 16px 20px; }
 			nav .links { gap: 16px; }
 		}
+
+		.alert {
+    margin: 16px 28px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba(255, 90, 90, 0.08);
+    border: 1px solid rgba(255, 90, 90, 0.35);
+    border-radius: 12px;
+    padding: 14px 16px;
+    opacity: 0;
+    animation: fieldIn 0.4s ease forwards;
+}
+
+.alert .icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(255, 90, 90, 0.18);
+    color: #ff5a5a;
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert .body {
+    flex: 1;
+    min-width: 0;
+}
+
+.alert .title {
+    font-weight: 700;
+    font-size: 13.5px;
+    color: #ff8080;
+    margin-bottom: 4px;
+}
+
+.alert .msg {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.5;
+}
+
+.alert .msg code {
+    font-family: var(--mono);
+    background: rgba(255,255,255,0.08);
+    padding: 1px 5px;
+    border-radius: 4px;
+    color: var(--text-main);
+    font-size: 11.5px;
+}
+
+.alert .close {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 6px;
+    transition: color 0.15s ease, background 0.15s ease;
+}
+
+.alert .close:hover {
+    color: var(--text-main);
+    background: rgba(255,255,255,0.08);
+}
 	</style>
 </head>
 <body>
@@ -345,16 +418,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 				</div>
 				<span class="badge"><span class="dot"></span>Live</span>
 			</div>
-<?php if (isset($_GET['denied'])): ?>
-	<div class="alert" id="deniedAlert">
-		<span class="icon">!</span>
-		<div class="body">
-			<div class="title">Access Denied!!!</div>
-			<div class="msg">StudentMiddleware blocked <code>/student/profile</code> you are redirected here.</div>
-		</div>
-		<button class="close" onclick="document.getElementById('deniedAlert').remove()">&times;</button>
-	</div>
-<?php endif; ?>
+			
+<div class="msg">Access to <code>/student/profile</code> was blocked. You've been redirected here.</div>
 
 			<div class="fields">
 				<div class="field"><span class="label">Student ID</span><span class="value"><?= $student_id ?></span></div>
