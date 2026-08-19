@@ -1,5 +1,24 @@
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
+
+/**
+ * Returns an inline SVG glyph for known platforms, or null if unrecognized
+ * (caller falls back to initials for anything not listed here).
+ */
+function social_icon_svg(string $platform): ?string
+{
+	$platform = strtolower($platform);
+
+	$icons = [
+		'github' => '<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.71 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.44-2.69 5.42-5.26 5.7.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.67.8.56C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z"/></svg>',
+		'facebook' => '<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M22 12.06C22 6.5 17.52 2 11.94 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.5-3.89 3.79-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z"/></svg>',
+		'instagram' => '<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.97.24 2.43.4a4.9 4.9 0 0 1 1.77 1.15 4.9 4.9 0 0 1 1.15 1.77c.16.46.35 1.26.4 2.43.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.97-.4 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.46.16-1.26.35-2.43.4-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.97-.24-2.43-.4a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.16-.46-.35-1.26-.4-2.43C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.24-1.97.4-2.43a4.9 4.9 0 0 1 1.15-1.77A4.9 4.9 0 0 1 5.55 1.8c.46-.16 1.26-.35 2.43-.4C9.25 1.34 9.63 1.33 12 1.33Zm0 1.85c-3.15 0-3.5.01-4.74.07-.96.04-1.48.2-1.83.34-.46.18-.79.39-1.14.74a3.06 3.06 0 0 0-.74 1.14c-.14.35-.3.87-.34 1.83-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.04.96.2 1.48.34 1.83.18.46.39.79.74 1.14.35.35.68.56 1.14.74.35.14.87.3 1.83.34 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.96-.04 1.48-.2 1.83-.34.46-.18.79-.39 1.14-.74.35-.35.56-.68.74-1.14.14-.35.3-.87.34-1.83.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.04-.96-.2-1.48-.34-1.83a3.06 3.06 0 0 0-.74-1.14 3.06 3.06 0 0 0-1.14-.74c-.35-.14-.87-.3-1.83-.34-1.24-.06-1.59-.07-4.74-.07Zm0 3.15a4.84 4.84 0 1 1 0 9.68 4.84 4.84 0 0 1 0-9.68Zm0 1.85a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.03-1.99a1.13 1.13 0 1 1 0 2.26 1.13 1.13 0 0 1 0-2.26Z"/></svg>',
+		'tiktok' => '<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M16.6 2h-3.2v13.9c0 1.5-1.2 2.7-2.7 2.7a2.7 2.7 0 0 1-2.7-2.7 2.7 2.7 0 0 1 2.7-2.7c.3 0 .6.05.85.13V9.9a5.9 5.9 0 0 0-.85-.06 5.9 5.9 0 0 0-5.9 5.9A5.9 5.9 0 0 0 10.7 21.6a5.9 5.9 0 0 0 5.9-5.9V8.4a8.1 8.1 0 0 0 4.7 1.5V6.7a4.85 4.85 0 0 1-4.7-4.7z"/></svg>',
+		'teams' => '<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.5 8.5a2.75 2.75 0 1 0 0-5.5 2.75 2.75 0 0 0 0 5.5Zm-6.8.6a3.4 3.4 0 1 0 0-6.8 3.4 3.4 0 0 0 0 6.8Zm7.9 1.4h-3.15c-.35 0-.68.14-.92.39.03.24.05.48.05.73v4.98c0 .97-.24 1.88-.66 2.68.28.08.58.12.88.12H19a1.5 1.5 0 0 0 1.5-1.5v-4.4a3 3 0 0 0-3-3ZM10.7 10.3H5.5A3.5 3.5 0 0 0 2 13.8v3.6a2.1 2.1 0 0 0 2.1 2.1h5.7a3.6 3.6 0 0 0 3.6-3.6v-2.2a3.4 3.4 0 0 0-2.7-3.4Z"/></svg>',
+	];
+
+	return $icons[$platform] ?? null;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -261,7 +280,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 		.identity .badge::before { content: '✓'; }
 
-		/* --- info card: two-column grid, different from a stacked list --- */
+		/* --- info card: two-column grid --- */
 		.info-card {
 			background: rgba(255,255,255,0.035);
 			border: 1px solid var(--glass-border);
@@ -415,7 +434,10 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			display: flex; align-items: center; justify-content: center;
 			font-family: var(--mono);
 			font-size: 9.5px; font-weight: 700;
+			flex-shrink: 0;
 		}
+
+		.social-icon svg { display: block; }
 
 		.social-label { font-size: 12.5px; font-weight: 600; color: var(--text-main); }
 
@@ -502,8 +524,9 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 					<div class="section-title">Social</div>
 					<div class="social-row">
 						<?php foreach ($social as $platform => $link): ?>
+							<?php $icon = social_icon_svg($platform); ?>
 							<a class="social-link" href="<?= $link ?>" target="_blank" rel="noopener">
-								<span class="social-icon"><?= strtoupper(substr($platform, 0, 2)) ?></span>
+								<span class="social-icon"><?= $icon ?? strtoupper(substr($platform, 0, 2)) ?></span>
 								<span class="social-label"><?= ucfirst($platform) ?></span>
 							</a>
 						<?php endforeach; ?>
