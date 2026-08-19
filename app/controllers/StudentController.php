@@ -45,7 +45,7 @@ class StudentController extends Controller
 				'instagram' => 'https://www.instagram.com/its.danskieee/',
 			    'tiktok'    => 'https://www.tiktok.com/@roldan.florida?lang=en',
 				'github'    => 'https://github.com/roldanf',
-				'teams'     => 'florida.roldano@minsu.edu.ph',
+				'linkedin'     => 'https://www.linkedin.com/in/roldan-florida-13124142b/',
 			],
 		];
 	}
