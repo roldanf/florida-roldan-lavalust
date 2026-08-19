@@ -345,6 +345,13 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 				</div>
 				<span class="badge"><span class="dot"></span>Live</span>
 			</div>
+<?php if (isset($_GET['denied'])): ?>
+		<div class="denied-banner">
+			ACCESS DENIED!!! 
+			StudentMiddleware blocked /student/profile!
+			You are redirected here.
+		</div>
+	<?php endif; ?>
 
 			<div class="fields">
 				<div class="field"><span class="label">Student ID</span><span class="value"><?= $student_id ?></span></div>
