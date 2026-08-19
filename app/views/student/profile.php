@@ -450,7 +450,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 			<div class="identity">
 				<div class="avatar">
-					<img src="<?= base_url('assets/img/dan.jpg') ?>"
+					<img src="<?= base_url('assets/img/dan.png') ?>"
 						 onerror="this.onerror=null;this.src='<?= base_url('assets/img/dan.svg') ?>';"
 						 alt="Profile photo of <?= $name ?>">
 				</div>
