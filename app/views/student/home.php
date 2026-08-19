@@ -411,7 +411,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 		<div class="panel">
 			<div class="panel-head">
 				<div>
-					<h1>Student Information</h1>
+					<h1>Mr.Florida's Information</h1>
 					<div class="sub">record::lookup()</div>
 				</div>
 				<span class="badge"><span class="dot"></span>Live</span>
