@@ -323,76 +323,74 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 		}
 
 		.alert {
-    margin: 16px 28px 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    background: rgba(255, 90, 90, 0.08);
-    border: 1px solid rgba(255, 90, 90, 0.35);
-    border-radius: 12px;
-    padding: 14px 16px;
-    opacity: 0;
-    animation: fieldIn 0.4s ease forwards;
+	margin: 18px 28px 0;
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	background: rgba(255, 82, 82, 0.10);
+	border: 1px solid rgba(255, 82, 82, 0.35);
+	border-radius: 12px;
+	padding: 14px 16px;
 }
 
-.alert .icon {
-    flex-shrink: 0;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: rgba(255, 90, 90, 0.18);
-    color: #ff5a5a;
-    font-family: var(--mono);
-    font-weight: 700;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.alert-icon {
+	flex-shrink: 0;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	background: rgba(255, 82, 82, 0.2);
+	color: #ff6b6b;
+	font-family: var(--mono);
+	font-weight: 700;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.alert .body {
-    flex: 1;
-    min-width: 0;
+.alert-body {
+	flex: 1;
+	min-width: 0;
 }
 
-.alert .title {
-    font-weight: 700;
-    font-size: 13.5px;
-    color: #ff8080;
-    margin-bottom: 4px;
+.alert-title {
+	font-weight: 700;
+	font-size: 14px;
+	color: #ff8a8a;
+	margin-bottom: 4px;
 }
 
-.alert .msg {
-    font-size: 12.5px;
-    color: var(--text-dim);
-    line-height: 1.5;
+.alert-msg {
+	font-size: 12.5px;
+	color: var(--text-dim);
+	line-height: 1.5;
 }
 
-.alert .msg code {
-    font-family: var(--mono);
-    background: rgba(255,255,255,0.08);
-    padding: 1px 5px;
-    border-radius: 4px;
-    color: var(--text-main);
-    font-size: 11.5px;
+.alert-msg code {
+	font-family: var(--mono);
+	background: rgba(255,255,255,0.09);
+	padding: 2px 6px;
+	border-radius: 4px;
+	color: var(--text-main);
+	font-size: 11.5px;
 }
 
-.alert .close {
-    flex-shrink: 0;
-    background: none;
-    border: none;
-    color: var(--text-dim);
-    font-size: 18px;
-    line-height: 1;
-    cursor: pointer;
-    padding: 2px 4px;
-    border-radius: 6px;
-    transition: color 0.15s ease, background 0.15s ease;
+.alert-close {
+	flex-shrink: 0;
+	background: none;
+	border: none;
+	color: var(--text-dim);
+	font-size: 20px;
+	line-height: 1;
+	cursor: pointer;
+	padding: 0 4px;
+	border-radius: 6px;
+	transition: color 0.15s ease, background 0.15s ease;
 }
 
-.alert .close:hover {
-    color: var(--text-main);
-    background: rgba(255,255,255,0.08);
+.alert-close:hover {
+	color: var(--text-main);
+	background: rgba(255,255,255,0.08);
 }
 	</style>
 </head>
@@ -419,7 +417,16 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 				<span class="badge"><span class="dot"></span>Live</span>
 			</div>
 			
-<div class="msg">Access to <code>/student/profile</code> was blocked. You've been redirected here.</div>
+<?php if (isset($_GET['denied'])): ?>
+	<div class="alert" id="deniedAlert">
+		<div class="alert-icon">!</div>
+		<div class="alert-body">
+			<div class="alert-title">Access Denied</div>
+			<div class="alert-msg">Access to <code>/student/profile</code> was blocked. You've been redirected here.</div>
+		</div>
+		<button type="button" class="alert-close" onclick="document.getElementById('deniedAlert').remove()">&times;</button>
+	</div>
+<?php endif; ?>
 
 			<div class="fields">
 				<div class="field"><span class="label">Student ID</span><span class="value"><?= $student_id ?></span></div>
