@@ -107,4 +107,6 @@ $autoload['models'] = array();
 |
 */
 $autoload['configs'] = array('middleware');
+
+$autoload['libraries'] = ['session'];
 ?>
