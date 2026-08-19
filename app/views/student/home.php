@@ -17,6 +17,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			--bg-b: #101a2e;
 			--accent: #4f8bff;
 			--accent-2: #33e0c2;
+			--danger: #ff5e6c;
+			--danger-soft: rgba(255,94,108,0.1);
 			--glass: rgba(255,255,255,0.06);
 			--glass-border: rgba(255,255,255,0.14);
 			--text-main: #eef2fb;
@@ -64,7 +66,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			z-index: 0;
 		}
 
-		/* === FULL-WIDTH NAV BAR (not a pill) === */
+		/* === FULL-WIDTH NAV BAR === */
 		nav {
 			position: relative;
 			z-index: 3;
@@ -158,10 +160,76 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			flex: 1;
 			width: 100%;
 			display: flex;
+			flex-direction: column;
 			align-items: center;
 			justify-content: center;
 			padding: 48px 20px;
 		}
+
+		/* === DENIED ACCESS ALERT === */
+		.alert {
+			width: 100%;
+			max-width: 440px;
+			display: flex;
+			align-items: flex-start;
+			gap: 12px;
+			background: var(--danger-soft);
+			border: 1px solid rgba(255,94,108,0.35);
+			border-radius: 14px;
+			padding: 14px 16px;
+			margin-bottom: 18px;
+			opacity: 0;
+			transform: translateY(-8px);
+			animation: alertIn 0.4s ease forwards;
+		}
+
+		@keyframes alertIn {
+			to { opacity: 1; transform: translateY(0); }
+		}
+
+		.alert .icon {
+			flex-shrink: 0;
+			width: 26px;
+			height: 26px;
+			border-radius: 8px;
+			background: rgba(255,94,108,0.18);
+			color: var(--danger);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: var(--mono);
+			font-weight: 700;
+			font-size: 13px;
+		}
+
+		.alert .body { flex: 1; }
+
+		.alert .title {
+			font-size: 13.5px;
+			font-weight: 700;
+			color: var(--danger);
+			margin-bottom: 2px;
+		}
+
+		.alert .msg {
+			font-size: 12.5px;
+			color: var(--text-dim);
+			line-height: 1.5;
+		}
+
+		.alert .close {
+			flex-shrink: 0;
+			background: none;
+			border: none;
+			color: var(--text-dim);
+			font-size: 16px;
+			line-height: 1;
+			cursor: pointer;
+			padding: 2px;
+			transition: color 0.2s ease;
+		}
+
+		.alert .close:hover { color: var(--text-main); }
 
 		.panel {
 			width: 100%;
@@ -337,6 +405,17 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 	</nav>
 
 	<main>
+		<?php if ($this->session->flashdata('access_denied')): ?>
+			<div class="alert" id="deniedAlert">
+				<span class="icon">!</span>
+				<div class="body">
+					<div class="title">Access Denied</div>
+					<div class="msg"><?= $this->session->flashdata('access_denied') ?></div>
+				</div>
+				<button class="close" onclick="document.getElementById('deniedAlert').remove()">&times;</button>
+			</div>
+		<?php endif; ?>
+
 		<div class="panel">
 			<div class="panel-head">
 				<div>
