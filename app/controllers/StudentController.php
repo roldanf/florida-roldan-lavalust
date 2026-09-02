@@ -30,21 +30,22 @@ class StudentController extends Controller
 	{
 		return [
 			'student_id'      => '2024-00037',
-			'name'            => 'Angela Nicole Cabrera',
+			'name'            => 'Roldan O. Florida',
 			'course'          => 'BS Information Technology',
 			'year'            => '3rd Year',
 			'section'         => 'F1',
-			'email'           => 'angelanicole1627@gmail.com',
-			'address'         => 'Comunal, Calapan City, Oriental Mindoro, Philippines',
-			'contact_number'  => '+63 963 252 9240',
-			'description'     => 'A working student and crafter, managing my own small business while studying. I aim to build a career in the IT field abroad, with a dream of becoming a full‑stack developer skilled in backend architecture, database design, and clean, creative layouts.',
-			'skills'          => ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL', 'C#'],
-			'hobbies'         => ['Reading', 'Crafting', 'Watching Movies/Anime', 'Playing ML', 'Cleaning', 'Organizing'],
+			'email'           => 'rldnflorida@gmail.com',
+			'address'         => 'Sta. Isabel, Calapan City, Oriental Mindoro, Philippines',
+			'contact_number'  => '09369445004',
+			'description'     => 'Driven and forward‑thinking IT student with a passion for programming and innovation. Known for strong leadership skills, guiding peers through collaborative projects and inspiring teamwork. Currently honing expertise in coding, system design, and problem‑solving, with the goal of becoming a versatile programmer who creates impactful digital solutions.',
+			'skills'          => ['PHP', 'Java', 'JavaScript', 'HTML', 'CSS', 'C#'],
+			'hobbies'         => ['Playing Online Games', 'Exploring', 'Coding', 'Inventing', 'Cleaning', 'Eating'],
 			'social'          => [
-				'facebook'  => 'https://www.facebook.com/ayenisbc',
-				'instagram' => 'https://www.instagram.com/ni.colies/',
-				'github'    => 'https://github.com/ayennnnbc',
-				'tiktok'    => 'https://tiktok.com/@twistfloraa',
+				'facebook'  => 'https://www.facebook.com/profile.php?id=61585165521411',
+				'tiktok'    => 'https://www.tiktok.com/@roldan.florida',
+				'github'    => 'https://github.com/roldanf',
+		 		'instagram' => 'https://www.instagram.com/its.danskieee/',
+				'twitter' => 'https://x.com/mysteryman_1111',
 			],
 		];
 	}
