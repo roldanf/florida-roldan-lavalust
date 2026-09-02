@@ -16,7 +16,7 @@ class UsersController extends Controller {
     public function usertable()
     {
         $users = $this->UsersModel->all();
-        $this->call->view('users', ['users' => $users]);
+        $this->call->view/('users/index', ['users' => $users]);
     }
 }
 
