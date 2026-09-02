@@ -61,4 +61,4 @@ $router->get('/student/profile', 'StudentController::profile')
 | Users Page Route
 | -------------------------------------------------------------------
 */
-$router->get('/users', 'UsersController::index');
+$router->get('/users', 'UsersController::usertable');
