@@ -17,13 +17,18 @@ class StudentController extends Controller
 		$this->call->view('student/home', $student);
 	}
 
-	public function profile()
-	{
-	
-		$student = $this->student_data();
+public function profile()
+{
+    // Example condition — replace with your real check
+    // (e.g. session flag set only when navigating from student_info, a token, etc.)
+    if (!$this->session->userdata('student_id')) {
+        $this->session->set_flashdata('access_denied', 'You must access your profile through the student portal.');
+        redirect('student');
+        return;
+    }
 
-		$this->call->view('student/profile', $student);
-	}
+    // ...load profile view as normal
+}
 
 
 	private function student_data()
