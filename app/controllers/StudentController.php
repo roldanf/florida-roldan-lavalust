@@ -3,27 +3,26 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 class StudentController extends Controller
 {
-	public function index()
+public function index()
 {
-    $data = $this->student_data();
-    $data['access_denied'] = $this->session->flashdata('access_denied');
 
-    $this->call->view('student/home', $data);
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    $_SESSION['student_access'] = true;
+
+
+    $student = $this->student_data();
+
+    $this->call->view('student/home', $student);
 }
 
 public function profile()
 {
-    // Example condition — replace with your real check
-    if (!$this->session->has_userdata('student_id')) {
-        $this->session->set_flashdata('access_denied', 'You must access your profile through the student portal.');
-        redirect('student');
-        return;
-    }
 
-    $data = $this->student_data();
-    $data['access_denied'] = $this->session->flashdata('access_denied');
+    $student = $this->student_data();
 
-    $this->call->view('student/profile', $data);
+    $this->call->view('student/profile', $student);
 }
 
 	private function student_data()
