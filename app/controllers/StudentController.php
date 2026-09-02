@@ -29,7 +29,7 @@ class StudentController extends Controller
 	private function student_data()
 	{
 		return [
-			'student_id'      => '2024-00036',
+			'student_id'      => '2024-00037',
 			'name'            => 'Angela Nicole Cabrera',
 			'course'          => 'BS Information Technology',
 			'year'            => '3rd Year',
