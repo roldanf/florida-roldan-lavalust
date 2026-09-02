@@ -8,8 +8,6 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 	<title>Users</title>
 </head>
 <body>
-	<h1>Users</h1>
-
 	<table border="1" cellpadding="8" cellspacing="0">
 		<thead>
 			<tr>
