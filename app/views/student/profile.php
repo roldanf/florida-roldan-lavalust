@@ -50,7 +50,6 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			overflow-x: hidden;
 		}
 
-		/* faint circuit lines */
 		body::before {
 			content: '';
 			position: fixed;
@@ -64,7 +63,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			z-index: 0;
 		}
 
-		/* === FULL-WIDTH NAV BAR === */
+		/* === NAV === */
 		nav {
 			position: relative;
 			z-index: 3;
@@ -85,66 +84,45 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			to { opacity: 1; transform: translateY(0); }
 		}
 
-		nav .brand {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-		}
+		nav .brand { display: flex; align-items: center; gap: 10px; }
 
 		nav .brand .glyph {
-			width: 30px;
-			height: 30px;
+			width: 30px; height: 30px;
 			border-radius: 8px;
 			background: linear-gradient(135deg, var(--accent), var(--accent-2));
-			display: flex;
-			align-items: center;
-			justify-content: center;
+			display: flex; align-items: center; justify-content: center;
 			font-family: var(--mono);
-			font-weight: 700;
-			font-size: 13px;
+			font-weight: 700; font-size: 13px;
 			color: var(--bg-a);
 		}
 
-		nav .brand span.name {
-			font-weight: 700;
-			font-size: 14.5px;
-			letter-spacing: 0.01em;
-		}
+		nav .brand span.name { font-weight: 700; font-size: 14.5px; letter-spacing: 0.01em; }
 
 		nav .brand span.name small {
 			display: block;
 			font-family: var(--mono);
-			font-weight: 500;
-			font-size: 10px;
+			font-weight: 500; font-size: 10px;
 			color: var(--text-dim);
 			letter-spacing: 0.06em;
 			margin-top: 1px;
 		}
 
-		nav .links {
-			display: flex;
-			align-items: center;
-			gap: 26px;
-		}
+		nav .links { display: flex; align-items: center; gap: 26px; }
 
 		nav a {
 			position: relative;
 			text-decoration: none;
 			color: var(--text-dim);
-			font-weight: 500;
-			font-size: 14px;
+			font-weight: 500; font-size: 14px;
 			transition: color 0.2s ease;
 		}
 
 		nav a::after {
 			content: '';
-			position: absolute;
-			left: 0; right: 0;
-			bottom: -6px;
+			position: absolute; left: 0; right: 0; bottom: -6px;
 			height: 2px;
 			background: linear-gradient(90deg, var(--accent), var(--accent-2));
-			transform: scaleX(0);
-			transform-origin: left;
+			transform: scaleX(0); transform-origin: left;
 			transition: transform 0.25s ease;
 		}
 
@@ -158,35 +136,112 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			flex: 1;
 			width: 100%;
 			display: flex;
-			align-items: center;
 			justify-content: center;
-			padding: 48px 20px;
+			padding: 44px 20px 60px;
 		}
 
-		.panel {
+		.profile {
 			width: 100%;
-			max-width: 560px;
-			background: var(--glass);
-			backdrop-filter: blur(18px);
-			border: 1px solid var(--glass-border);
-			border-radius: 20px;
-			overflow: hidden;
-			box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+			max-width: 720px;
 			opacity: 0;
-			transform: translateY(22px);
-			animation: rise 0.55s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
+			transform: translateY(18px);
+			animation: rise 0.55s cubic-bezier(0.16,1,0.3,1) 0.12s forwards;
 		}
 
 		@keyframes rise {
 			to { opacity: 1; transform: translateY(0); }
 		}
 
-		.panel-body {
-			padding: 34px 32px 30px;
-			text-align: center;
+		/* --- hero cover --- */
+		.cover {
+			position: relative;
+			height: 128px;
+			border-radius: 18px 18px 0 0;
+			background:
+				repeating-linear-gradient(120deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 22px),
+				linear-gradient(120deg, var(--accent), var(--accent-2));
+			border: 1px solid var(--glass-border);
+			border-bottom: none;
+			overflow: hidden;
 		}
 
-		.badge {
+		.cover .status {
+			position: absolute;
+			top: 14px; right: 18px;
+			display: flex; align-items: center; gap: 6px;
+			font-family: var(--mono);
+			font-size: 10px; font-weight: 700;
+			letter-spacing: 0.05em;
+			color: var(--bg-a);
+			background: rgba(11,18,32,0.35);
+			padding: 5px 10px;
+			border-radius: 999px;
+		}
+
+		.cover .status .dot {
+			width: 6px; height: 6px; border-radius: 50%;
+			background: var(--bg-a);
+			animation: pulse 1.7s ease-in-out infinite;
+		}
+
+		@keyframes pulse {
+			0%, 100% { opacity: 1; }
+			50% { opacity: 0.3; }
+		}
+
+		/* --- identity strip: avatar overlaps cover --- */
+		.identity {
+			position: relative;
+			background: var(--glass);
+			backdrop-filter: blur(18px);
+			border: 1px solid var(--glass-border);
+			border-top: none;
+			padding: 0 28px 22px;
+			display: flex;
+			align-items: flex-end;
+			gap: 18px;
+		}
+
+		.avatar {
+			width: 92px; height: 92px;
+			border-radius: 20px;
+			margin-top: -46px;
+			overflow: hidden;
+			border: 3px solid var(--bg-a);
+			box-shadow: 0 10px 26px rgba(0,0,0,0.5);
+			flex-shrink: 0;
+			opacity: 0;
+			transform: scale(0.85);
+			animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s forwards;
+		}
+
+		@keyframes popIn {
+			to { opacity: 1; transform: scale(1); }
+		}
+
+		.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+		.identity .who {
+			padding-top: 14px;
+			opacity: 0;
+			animation: fadeIn 0.45s ease 0.5s forwards;
+		}
+
+		@keyframes fadeIn { to { opacity: 1; } }
+
+		.identity h1 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em; }
+
+		.identity .subrole {
+			font-family: var(--mono);
+			font-size: 11.5px;
+			color: var(--accent-2);
+			margin-top: 3px;
+		}
+
+		.identity .badge {
+			margin-left: auto;
+			align-self: flex-start;
+			margin-top: 14px;
 			display: inline-flex;
 			align-items: center;
 			gap: 6px;
@@ -194,151 +249,99 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			border: 1px solid rgba(51,224,194,0.35);
 			color: var(--accent-2);
 			font-family: var(--mono);
-			font-size: 10.5px;
-			font-weight: 600;
-			letter-spacing: 0.05em;
+			font-size: 10px; font-weight: 600;
+			letter-spacing: 0.04em;
 			text-transform: uppercase;
-			padding: 5px 14px;
+			padding: 5px 12px;
 			border-radius: 999px;
-			margin-bottom: 22px;
+			white-space: nowrap;
 			opacity: 0;
-			animation: fadeIn 0.4s ease 0.4s forwards;
+			animation: fadeIn 0.45s ease 0.58s forwards;
 		}
 
-		@keyframes fadeIn {
-			to { opacity: 1; }
+		.identity .badge::before { content: '✓'; }
+
+		/* --- info card: two-column grid, different from a stacked list --- */
+		.info-card {
+			background: rgba(255,255,255,0.035);
+			border: 1px solid var(--glass-border);
+			border-top: none;
+			padding: 22px 28px;
 		}
 
-		.badge::before { content: '✓'; }
-
-		.avatar {
-			width: 108px;
-			height: 108px;
-			border-radius: 50%;
-			margin: 0 auto 18px;
+		.info-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 1px;
+			background: var(--glass-border);
+			border: 1px solid var(--glass-border);
+			border-radius: 12px;
 			overflow: hidden;
-			border: 3px solid var(--accent-2);
-			box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-			position: relative;
-			opacity: 0;
-			transform: scale(0.85);
-			animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards,
-				pulse 2.6s ease-in-out 1.1s infinite;
 		}
 
-		@keyframes popIn {
-			to { opacity: 1; transform: scale(1); }
-		}
-
-		@keyframes pulse {
-			0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 0 0 rgba(51,224,194,0.4); }
-			50% { box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 0 8px rgba(51,224,194,0); }
-		}
-
-		.avatar img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			display: block;
-		}
-
-		h1 {
-			font-size: 1.4rem;
-			font-weight: 700;
-			letter-spacing: -0.01em;
-			margin-bottom: 4px;
-			opacity: 0;
-			animation: fadeIn 0.4s ease 0.65s forwards;
-		}
-
-		.subrole {
-			font-family: var(--mono);
-			font-size: 12px;
-			color: var(--accent-2);
-			margin-bottom: 26px;
-			opacity: 0;
-			animation: fadeIn 0.4s ease 0.75s forwards;
-		}
-
-		.fields {
-			text-align: left;
-			margin-bottom: 4px;
-		}
-
-		.field {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			gap: 12px;
-			padding: 13px 0;
-			border-bottom: 1px solid rgba(255,255,255,0.07);
+		.stat {
+			background: var(--bg-a);
+			padding: 12px 16px;
 			opacity: 0;
 			transform: translateY(8px);
 			animation: slideIn 0.4s ease forwards;
 		}
 
-		.field:last-child { border-bottom: none; }
+		@keyframes slideIn { to { opacity: 1; transform: translateY(0); } }
 
-		@keyframes slideIn {
-			to { opacity: 1; transform: translateY(0); }
-		}
+		.info-grid .stat:nth-child(1) { animation-delay: 0.62s; }
+		.info-grid .stat:nth-child(2) { animation-delay: 0.67s; }
+		.info-grid .stat:nth-child(3) { animation-delay: 0.72s; }
+		.info-grid .stat:nth-child(4) { animation-delay: 0.77s; }
+		.info-grid .stat:nth-child(5) { animation-delay: 0.82s; }
+		.info-grid .stat:nth-child(6) { animation-delay: 0.87s; }
+		.info-grid .stat:nth-child(7) { animation-delay: 0.92s; }
+		.info-grid .stat:nth-child(8) { animation-delay: 0.97s; }
 
-		/* staggered reveal, counted only among .field siblings inside .fields */
-		.fields .field:nth-child(1) { animation-delay: 0.85s; }
-		.fields .field:nth-child(2) { animation-delay: 0.92s; }
-		.fields .field:nth-child(3) { animation-delay: 0.99s; }
-		.fields .field:nth-child(4) { animation-delay: 1.06s; }
-		.fields .field:nth-child(5) { animation-delay: 1.13s; }
-		.fields .field:nth-child(6) { animation-delay: 1.20s; }
-		.fields .field:nth-child(7) { animation-delay: 1.27s; }
-		.fields .field:nth-child(8) { animation-delay: 1.34s; }
-
-		.field .label {
-			display: flex;
-			align-items: center;
-			gap: 8px;
-			font-size: 13px;
-			font-weight: 500;
-			color: var(--text-dim);
-			white-space: nowrap;
-		}
-
-		.field .label::before {
-			content: '';
-			width: 5px;
-			height: 5px;
-			border-radius: 50%;
-			background: var(--accent);
-			flex-shrink: 0;
-		}
-
-		.field .value {
+		.stat .k {
 			font-family: var(--mono);
-			font-size: 13.5px;
-			font-weight: 500;
-			color: var(--text-main);
-			text-align: right;
+			font-size: 9.5px;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			color: var(--text-dim);
+			margin-bottom: 5px;
 		}
 
-		.sections { text-align: left; }
+		.stat .v {
+			font-size: 13.5px;
+			font-weight: 600;
+			color: var(--text-main);
+			word-break: break-word;
+		}
+
+		/* --- lower panel: description / skills / hobbies / social --- */
+		.lower-panel {
+			background: var(--glass);
+			backdrop-filter: blur(18px);
+			border: 1px solid var(--glass-border);
+			border-top: none;
+			border-radius: 0 0 18px 18px;
+			padding: 22px 28px 30px;
+		}
 
 		.section-block {
-			margin-top: 24px;
+			margin-bottom: 22px;
 			opacity: 0;
 			animation: fadeIn 0.5s ease forwards;
 		}
 
-		/* staggered reveal, counted only among .section-block siblings inside .sections */
-		.sections .section-block:nth-child(1) { animation-delay: 1.42s; }
-		.sections .section-block:nth-child(2) { animation-delay: 1.50s; }
-		.sections .section-block:nth-child(3) { animation-delay: 1.58s; }
-		.sections .section-block:nth-child(4) { animation-delay: 1.66s; }
+		.section-block:last-child { margin-bottom: 0; }
+
+		.lower-panel .section-block:nth-child(1) { animation-delay: 1.02s; }
+		.lower-panel .section-block:nth-child(2) { animation-delay: 1.09s; }
+		.lower-panel .section-block:nth-child(3) { animation-delay: 1.16s; }
+		.lower-panel .section-block:nth-child(4) { animation-delay: 1.23s; }
 
 		.section-title {
 			font-family: var(--mono);
-			font-size: 11px;
+			font-size: 10.5px;
 			text-transform: uppercase;
-			letter-spacing: 0.06em;
+			letter-spacing: 0.08em;
 			color: var(--accent-2);
 			font-weight: 600;
 			margin-bottom: 10px;
@@ -349,17 +352,13 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 		.section-title::before {
 			content: '';
-			width: 5px;
-			height: 5px;
-			border-radius: 50%;
+			width: 12px; height: 1px;
 			background: var(--accent-2);
-			box-shadow: 0 0 6px var(--accent-2);
 		}
 
 		.description-text {
-			background: rgba(255,255,255,0.04);
+			background: rgba(255,255,255,0.03);
 			border: 1px solid var(--glass-border);
-			border-left: 3px solid var(--accent);
 			border-radius: 10px;
 			padding: 14px 16px;
 			font-size: 13.5px;
@@ -367,21 +366,16 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			color: var(--text-main);
 		}
 
-		.tag-group {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 8px;
-		}
+		.tag-group { display: flex; flex-wrap: wrap; gap: 8px; }
 
 		.tag {
 			background: rgba(255,255,255,0.04);
 			border: 1px solid var(--glass-border);
 			color: var(--text-main);
 			font-family: var(--mono);
-			font-size: 11.5px;
-			font-weight: 500;
+			font-size: 11.5px; font-weight: 500;
 			padding: 6px 12px;
-			border-radius: 999px;
+			border-radius: 8px;
 			transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 		}
 
@@ -393,11 +387,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			transform: translateY(-2px);
 		}
 
-		.social-links {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 10px;
-		}
+		.social-row { display: flex; flex-wrap: wrap; gap: 10px; }
 
 		.social-link {
 			display: inline-flex;
@@ -405,8 +395,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			gap: 8px;
 			background: rgba(255,255,255,0.04);
 			border: 1px solid var(--glass-border);
-			border-radius: 999px;
-			padding: 6px 14px 6px 6px;
+			border-radius: 10px;
+			padding: 8px 14px 8px 8px;
 			text-decoration: none;
 			transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 		}
@@ -418,28 +408,23 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 		}
 
 		.social-icon {
-			width: 26px;
-			height: 26px;
-			border-radius: 50%;
+			width: 24px; height: 24px;
+			border-radius: 6px;
 			background: linear-gradient(135deg, var(--accent), var(--accent-2));
 			color: var(--bg-a);
-			display: flex;
-			align-items: center;
-			justify-content: center;
+			display: flex; align-items: center; justify-content: center;
 			font-family: var(--mono);
-			font-size: 10px;
-			font-weight: 700;
+			font-size: 9.5px; font-weight: 700;
 		}
 
-		.social-label {
-			font-size: 12.5px;
-			font-weight: 600;
-			color: var(--text-main);
-		}
+		.social-label { font-size: 12.5px; font-weight: 600; color: var(--text-main); }
 
 		@media (max-width: 560px) {
 			nav { padding: 16px 20px; }
 			nav .links { gap: 16px; }
+			.identity { flex-wrap: wrap; }
+			.identity .badge { margin-left: 0; margin-top: 8px; }
+			.info-grid { grid-template-columns: 1fr; }
 		}
 	</style>
 </head>
@@ -457,67 +442,75 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 	</nav>
 
 	<main>
-		<div class="panel">
-			<div class="panel-body">
-				<span class="badge">Verified by StudentMiddleware</span>
+		<div class="profile">
 
+			<div class="cover">
+				<span class="status"><span class="dot"></span>Live</span>
+			</div>
+
+			<div class="identity">
 				<div class="avatar">
 					<img src="<?= base_url('assets/img/nikolprof.jpeg') ?>"
 						 onerror="this.onerror=null;this.src='<?= base_url('assets/img/nikolprof.svg') ?>';"
 						 alt="Profile photo of <?= $name ?>">
 				</div>
+				<div class="who">
+					<h1><?= $name ?></h1>
+					<div class="subrole"><?= $course ?> · <?= $section ?></div>
+				</div>
+				<span class="badge">Verified</span>
+			</div>
 
-				<h1><?= $name ?></h1>
-				<div class="subrole"><?= $course ?> · <?= $section ?></div>
+			<div class="info-card">
+				<div class="info-grid">
+					<div class="stat"><div class="k">Student ID</div><div class="v"><?= $student_id ?></div></div>
+					<div class="stat"><div class="k">Name</div><div class="v"><?= $name ?></div></div>
+					<div class="stat"><div class="k">Course</div><div class="v"><?= $course ?></div></div>
+					<div class="stat"><div class="k">Year Level</div><div class="v"><?= $year ?></div></div>
+					<div class="stat"><div class="k">Section</div><div class="v"><?= $section ?></div></div>
+					<div class="stat"><div class="k">Email</div><div class="v"><?= $email ?></div></div>
+					<div class="stat"><div class="k">Address</div><div class="v"><?= $address ?></div></div>
+					<div class="stat"><div class="k">Contact No.</div><div class="v"><?= $contact_number ?></div></div>
+				</div>
+			</div>
 
-				<div class="fields">
-					<div class="field"><span class="label">Student ID</span><span class="value"><?= $student_id ?></span></div>
-					<div class="field"><span class="label">Name</span><span class="value"><?= $name ?></span></div>
-					<div class="field"><span class="label">Course</span><span class="value"><?= $course ?></span></div>
-					<div class="field"><span class="label">Year Level</span><span class="value"><?= $year ?></span></div>
-					<div class="field"><span class="label">Section</span><span class="value"><?= $section ?></span></div>
-					<div class="field"><span class="label">Email</span><span class="value"><?= $email ?></span></div>
-					<div class="field"><span class="label">Address</span><span class="value"><?= $address ?></span></div>
-					<div class="field"><span class="label">Contact No.</span><span class="value"><?= $contact_number ?></span></div>
+			<div class="lower-panel">
+				<div class="section-block">
+					<div class="section-title">Description</div>
+					<p class="description-text"><?= $description ?></p>
 				</div>
 
-				<div class="sections">
-					<div class="section-block">
-						<div class="section-title">Description</div>
-						<p class="description-text"><?= $description ?></p>
+				<div class="section-block">
+					<div class="section-title">Skills</div>
+					<div class="tag-group">
+						<?php foreach ($skills as $skill): ?>
+							<span class="tag"><?= $skill ?></span>
+						<?php endforeach; ?>
 					</div>
+				</div>
 
-					<div class="section-block">
-						<div class="section-title">Skills</div>
-						<div class="tag-group">
-							<?php foreach ($skills as $skill): ?>
-								<span class="tag"><?= $skill ?></span>
-							<?php endforeach; ?>
-						</div>
+				<div class="section-block">
+					<div class="section-title">Hobbies</div>
+					<div class="tag-group">
+						<?php foreach ($hobbies as $hobby): ?>
+							<span class="tag"><?= $hobby ?></span>
+						<?php endforeach; ?>
 					</div>
+				</div>
 
-					<div class="section-block">
-						<div class="section-title">Hobbies</div>
-						<div class="tag-group">
-							<?php foreach ($hobbies as $hobby): ?>
-								<span class="tag"><?= $hobby ?></span>
-							<?php endforeach; ?>
-						</div>
-					</div>
-
-					<div class="section-block">
-						<div class="section-title">Social</div>
-						<div class="social-links">
-							<?php foreach ($social as $platform => $link): ?>
-								<a class="social-link" href="<?= $link ?>" target="_blank" rel="noopener">
-									<span class="social-icon"><?= strtoupper(substr($platform, 0, 2)) ?></span>
-									<span class="social-label"><?= ucfirst($platform) ?></span>
-								</a>
-							<?php endforeach; ?>
-						</div>
+				<div class="section-block">
+					<div class="section-title">Social</div>
+					<div class="social-row">
+						<?php foreach ($social as $platform => $link): ?>
+							<a class="social-link" href="<?= $link ?>" target="_blank" rel="noopener">
+								<span class="social-icon"><?= strtoupper(substr($platform, 0, 2)) ?></span>
+								<span class="social-label"><?= ucfirst($platform) ?></span>
+							</a>
+						<?php endforeach; ?>
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</main>
 
