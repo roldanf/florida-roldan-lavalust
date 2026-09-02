@@ -5,9 +5,8 @@ class StudentController extends Controller
 {
 	public function index()
 {
+    $data = $this->student_data();
     $data['access_denied'] = $this->session->flashdata('access_denied');
-
-    // ...your existing data (student_id, name, course, etc.)
 
     $this->call->view('student/home', $data);
 }
@@ -20,6 +19,9 @@ public function profile()
         redirect('student');
         return;
     }
+
+    $data = $this->student_data();
+    $data['access_denied'] = $this->session->flashdata('access_denied');
 
     $this->call->view('student/profile', $data);
 }
