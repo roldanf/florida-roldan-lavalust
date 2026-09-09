@@ -81,6 +81,13 @@ class AuthController extends Controller {
                 $username = $this->request->post('username');
                 $password = $this->request->post('password');
 
+                // Whitelist the role so only 'user' or 'admin' can ever be
+                // written, regardless of what value is submitted.
+                $role = $this->request->post('role');
+                if (!in_array($role, ['user', 'admin'], true)) {
+                    $role = 'user';
+                }
+
                 // Manual uniqueness check (is_unique rule needs two params,
                 // which the pipe-based rule syntax can't pass).
                 if ($this->CrudUserModel->find_by('username', $username)) {
@@ -91,7 +98,7 @@ class AuthController extends Controller {
                 $this->CrudUserModel->insert([
                     'username' => $username,
                     'password' => password_hash($password, PASSWORD_DEFAULT),
-                    'role'     => 'user',
+                    'role'     => $role,
                 ]);
 
                 $this->session->set_flashdata('success', 'Account created successfully. You may now log in.');
