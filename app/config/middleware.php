@@ -42,6 +42,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 |
 */
 require_once APP_DIR . 'middlewares/StudentMiddleware.php';
+<<<<<<< HEAD
 require_once APP_DIR . 'middlewares/AuthMiddleware.php';
 require_once APP_DIR . 'middlewares/AdminMiddleware.php';
 
@@ -49,4 +50,9 @@ $config['middlewares'] = [
 	'student.access' => new StudentMiddleware(),
 	'auth.access'     => new AuthMiddleware(),
 	'admin.access'    => new AdminMiddleware(),
+=======
+
+$config['middlewares'] = [
+	'student.access' => new StudentMiddleware(),
+>>>>>>> 701aab6aad5a1b25657c38ecb3e3f03579662e8b
 ];
