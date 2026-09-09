@@ -99,11 +99,8 @@ $config['proxy_enabled']           = FALSE;
 | variable to blank.
 |
 */
-<<<<<<< HEAD
+
 $config['index_page']               = '';
-=======
-$config['index_page']               = 'index.php';
->>>>>>> 701aab6aad5a1b25657c38ecb3e3f03579662e8b
 
 /*
 |--------------------------------------------------------------------------
