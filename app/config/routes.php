@@ -62,7 +62,6 @@ $router->get('/student/profile', 'StudentController::profile')
 | -------------------------------------------------------------------
 */
 $router->get('/users', 'UsersController::usertable');
-<<<<<<< HEAD
 
 /*
 | -------------------------------------------------------------------
@@ -92,5 +91,3 @@ $router->group(['prefix' => 'products', 'middleware' => 'auth.access'], function
 		$router->post('/delete/{id}', 'ProductController::delete');
 	});
 });
-=======
->>>>>>> 701aab6aad5a1b25657c38ecb3e3f03579662e8b
