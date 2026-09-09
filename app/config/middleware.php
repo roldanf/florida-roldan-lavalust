@@ -50,7 +50,6 @@ $config['middlewares'] = [
 	'student.access' => new StudentMiddleware(),
 	'auth.access'     => new AuthMiddleware(),
 	'admin.access'    => new AdminMiddleware(),
-=======
 
 $config['middlewares'] = [
 	'student.access' => new StudentMiddleware(),
