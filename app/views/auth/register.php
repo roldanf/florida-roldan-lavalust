@@ -104,7 +104,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			color: rgba(255,255,255,0.75);
 			text-transform: uppercase;
 		}
-		.field input {
+		.field input,
+		.field select {
 			width: 100%;
 			padding: 12px 14px;
 			border: 1px solid rgba(255,255,255,0.15);
@@ -113,13 +114,19 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			background: rgba(255,255,255,0.06);
 			color: #fff;
 			transition: border-color .25s, box-shadow .25s, background .25s;
+			font-family: inherit;
 		}
 		.field input::placeholder { color: rgba(255,255,255,0.3); }
-		.field input:focus {
+		.field input:focus,
+		.field select:focus {
 			outline: none;
 			border-color: #67e8f9;
 			background: rgba(255,255,255,0.1);
 			box-shadow: 0 0 0 4px rgba(103,232,249,0.18);
+		}
+		.field select option {
+			background: #1b1136;
+			color: #fff;
 		}
 
 		.btn-submit {
@@ -202,6 +209,14 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 			<div class="field">
 				<label for="confirm_password">Confirm Password</label>
 				<input type="password" name="confirm_password" id="confirm_password" placeholder="Repeat your password">
+			</div>
+
+			<div class="field">
+				<label for="role">Role</label>
+				<select name="role" id="role">
+					<option value="user">User</option>
+					<option value="admin">Admin</option>
+				</select>
 			</div>
 
 			<button type="submit" class="btn-submit">Register</button>
